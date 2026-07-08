@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "eric-friday-portfolio",
+  "compatibility_date": "2026-07-07",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "@tanstack/react-start/server-entry",
+  "observability": {
+    "enabled": true
+  }
+  // Future enhancement: add bindings here (KV, R2, D1, Workers AI,
+  // service bindings, Durable Objects) then run `pnpm cf-typegen`.
+}

@@ -1,0 +1,44 @@
+/* ------------------------------------------------------------------ *
+ * Portfolio design tokens — the merged "house style".
+ * Palette, type, and rhythm from Portfolio - Design Specifications.
+ * Consumed by apps/web via Tailwind v4 @theme + :root overrides.
+ * ------------------------------------------------------------------ */
+:root {
+  /* Surfaces */
+  --paper: #f4f5f2;
+  --paper-2: #ebede9;
+  --band: #e6ede9;
+  --card: #fbfcfa;
+  /* Ink */
+  --ink: #19211e;
+  --ink-soft: #45504b;
+  --muted: #8b958f;
+  --line: #dde1dc;
+  /* Accents — green leads, blue tags domains */
+  --green: #2e7d6a;
+  --green-soft: #dcebe5;
+  --blue: #3a6ea5;
+  --blue-soft: #e0eaf2;
+
+  --radius: 16px;
+  --measure: 660px;
+  --content-max: 1080px;
+  --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  --font-sans: "Spline Sans", system-ui, sans-serif;
+}
+
+.dark {
+  --paper: #121614;
+  --paper-2: #171c1a;
+  --band: #10201b;
+  --card: #181e1b;
+  --ink: #e8ece9;
+  --ink-soft: #aeb6b1;
+  --muted: #77827c;
+  --line: #262d29;
+  --green: #4fbfa3;
+  --green-soft: #14342c;
+  --blue: #7aa7d4;
+  --blue-soft: #16283a;
+}

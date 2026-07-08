@@ -1,0 +1,11 @@
+node_modules
+dist
+.output
+.tanstack
+.nitro
+.wrangler
+.dev.vars
+*.local
+.DS_Store
+worker-configuration.d.ts
+src/routeTree.gen.ts
