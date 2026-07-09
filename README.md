@@ -18,7 +18,7 @@ The merged "house style" from the design spec: A's book-cover hero + numbered
 Contents, B's sticky nav + Selected-Work cards, C's count-up stats + filterable
 Contribution-Map ledger (the fully wired example section, fed via a TanStack
 Start server function + TanStack Query), and D's pull-quotes + closing Contact
-statement. Type: Newsreader + IBM Plex Mono. Tokens live in
+statement. Type: ET Book, with Newsreader + IBM Plex Mono fallbacks. Tokens live in
 `packages/config/tokens.css`.
 
 ## Develop
