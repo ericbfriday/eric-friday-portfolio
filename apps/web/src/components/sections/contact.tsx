@@ -39,7 +39,16 @@ export function Contact() {
         ))}
       </div>
       <p className="mt-16 font-mono text-[11px] uppercase tracking-[1.5px] text-[var(--muted)]">
-        © 2026 Eric B. Friday — Set in Newsreader &amp; IBM Plex Mono
+        © 2026 Eric B. Friday — Set in{" "}
+        <a
+          href="https://edwardtufte.github.io/et-book/"
+          target="_blank"
+          rel="noreferrer"
+          className="transition-colors hover:text-[var(--green)]"
+        >
+          ET Book
+        </a>
+        , Newsreader &amp; IBM Plex Mono
       </p>
     </Section>
   );
