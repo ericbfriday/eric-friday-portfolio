@@ -6,7 +6,6 @@ import {
   leadership,
   projects,
   skills,
-  stats,
   timeline,
 } from "@portfolio/content";
 import { contributionQueryOptions } from "@/lib/portfolio-data";
@@ -272,7 +271,7 @@ function MagazineContributionMap() {
     >
       <div className="grid gap-8 lg:grid-cols-[0.8fr_1.6fr] lg:items-start">
         <div className="reveal grid grid-cols-2 gap-4">
-          {stats.map((stat) => (
+          {data.stats.map((stat) => (
             <MagazineStat key={stat.label} {...stat} />
           ))}
         </div>
