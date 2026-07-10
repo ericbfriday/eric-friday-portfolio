@@ -73,7 +73,7 @@ export function ContributionMap() {
               key={f}
               type="button"
               onClick={() => setFilter(f)}
-              className={`rounded-full border px-3.5 py-1 font-mono text-[11px] uppercase tracking-[1px] transition-colors ${
+              className={`rounded-full border px-4 py-1.5 font-mono text-[11px] leading-none uppercase tracking-[1px] transition-colors ${
                 isActive
                   ? "border-[var(--green)] bg-[var(--green-soft)] text-[var(--green)]"
                   : "border-[var(--line)] text-[var(--ink-soft)] hover:border-[var(--green)]"
