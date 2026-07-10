@@ -5,8 +5,9 @@
 **Layout Direction** — one of four selectable full-page presentations of the
 same portfolio content: **Book** (single reading column, prose-first, most
 literary), **Magazine** (colored hero band, asymmetric columns, most
-expressive), **Merged** (the current live site — a hybrid combining pieces of
-all four directions; see its section-by-section spec on the issue tracker),
+expressive), **Merged** (the original live site - a hybrid combining pieces of
+all four directions; see `docs/layouts/merged.md` for its section-by-section
+spec),
 and **Terminal** (a terminal-inspired presentation with light command
 affordances, not a full command interpreter). Directions are documented as a
 design system in `Portfolio - Design Specifications.html` (Part 1) and
