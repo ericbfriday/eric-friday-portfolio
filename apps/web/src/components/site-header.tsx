@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { nav } from "@portfolio/content";
+import type { LayoutId } from "@/lib/layouts";
+import { LayoutSwitcher } from "./layout-switcher";
 import { ThemeToggle } from "./theme-toggle";
 
-export function SiteHeader() {
+export function SiteHeader({ activeLayout }: { activeLayout: LayoutId }) {
   const [active, setActive] = useState<string>(nav[0]?.id ?? "");
 
   useEffect(() => {
@@ -47,7 +49,10 @@ export function SiteHeader() {
             </a>
           ))}
         </nav>
-        <ThemeToggle />
+        <div className="flex items-center gap-2">
+          <LayoutSwitcher activeLayout={activeLayout} />
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );
