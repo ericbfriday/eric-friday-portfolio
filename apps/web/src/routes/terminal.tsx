@@ -1,8 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { LayoutPlaceholder } from "@/components/layout-placeholder";
+import { contributionQueryOptions } from "@/lib/portfolio-data";
+import { TerminalLayout } from "@/components/layouts/terminal";
 import { createLayoutCookie } from "@/lib/layouts";
 
 export const Route = createFileRoute("/terminal")({
+  loader: ({ context }) =>
+    context.queryClient.ensureQueryData(contributionQueryOptions),
   headers: () => ({
     "Set-Cookie": createLayoutCookie("terminal"),
   }),
@@ -10,5 +13,5 @@ export const Route = createFileRoute("/terminal")({
 });
 
 function Terminal() {
-  return <LayoutPlaceholder layout="terminal" />;
+  return <TerminalLayout />;
 }
