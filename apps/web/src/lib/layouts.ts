@@ -31,8 +31,7 @@ export const layouts = [
 export type LayoutId = (typeof layouts)[number]["id"];
 export type LayoutPath = (typeof layouts)[number]["path"];
 
-// Temporary issue #1 default. Flip this to "book" when the Book layout ships.
-export const DEFAULT_LAYOUT_ID: LayoutId = "merged";
+export const DEFAULT_LAYOUT_ID: LayoutId = "book";
 
 export const DEFAULT_LAYOUT =
   layouts.find((layout) => layout.id === DEFAULT_LAYOUT_ID) ?? layouts[0];
