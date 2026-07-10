@@ -1,14 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { LayoutPlaceholder } from "@/components/layout-placeholder";
+import { BookLayout } from "@/components/layouts/book";
+import { contributionQueryOptions } from "@/lib/portfolio-data";
 import { createLayoutCookie } from "@/lib/layouts";
 
 export const Route = createFileRoute("/book")({
+  loader: ({ context }) =>
+    context.queryClient.ensureQueryData(contributionQueryOptions),
   headers: () => ({
     "Set-Cookie": createLayoutCookie("book"),
   }),
-  component: Book,
+  component: BookLayout,
 });
-
-function Book() {
-  return <LayoutPlaceholder layout="book" />;
-}
