@@ -1,8 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { LayoutPlaceholder } from "@/components/layout-placeholder";
+import { contributionQueryOptions } from "@/lib/portfolio-data";
 import { createLayoutCookie } from "@/lib/layouts";
+import { MagazineLayout } from "@/components/layouts/magazine";
 
 export const Route = createFileRoute("/magazine")({
+  loader: ({ context }) =>
+    context.queryClient.ensureQueryData(contributionQueryOptions),
   headers: () => ({
     "Set-Cookie": createLayoutCookie("magazine"),
   }),
@@ -10,5 +13,5 @@ export const Route = createFileRoute("/magazine")({
 });
 
 function Magazine() {
-  return <LayoutPlaceholder layout="magazine" />;
+  return <MagazineLayout />;
 }
