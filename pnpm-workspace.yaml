@@ -5,3 +5,8 @@ allowBuilds:
   esbuild: true
   sharp: true
   workerd: true
+# Security: force patched versions of transitive deps that upstream has not yet bumped.
+overrides:
+  undici: "^7.29.1"
+  browserslist: "^4.28.7"
+  baseline-browser-mapping: "^2.11.0"
