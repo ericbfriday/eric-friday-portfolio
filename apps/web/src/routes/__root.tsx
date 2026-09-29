@@ -21,14 +21,17 @@ export const Route = createRootRouteWithContext<RouterContext>()({
           "Portfolio of Eric B. Friday — frontend platform engineering, application security & identity, and AI/MCP developer tooling for enterprise healthcare.",
       },
     ],
-    links: [{ rel: "stylesheet", href: appCss }],
+    links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+    ],
   }),
   shellComponent: RootDocument,
 });
 
 function RootDocument({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
         {/* Prevent theme flash: set .dark before first paint. */}
@@ -39,6 +42,12 @@ function RootDocument({ children }: { children: ReactNode }) {
         />
       </head>
       <body>
+        <a
+          href="#main-content"
+          className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-md bg-[var(--ink)] px-4 py-2 font-mono text-sm text-[var(--paper)] shadow-lg transition-transform focus:translate-y-0"
+        >
+          Skip to content
+        </a>
         {children}
         <Scripts />
       </body>

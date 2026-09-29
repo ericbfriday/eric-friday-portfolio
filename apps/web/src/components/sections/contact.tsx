@@ -1,17 +1,8 @@
-import { useEffect, useRef } from "react";
 import { contact } from "@portfolio/content";
 import { Section } from "../section";
 
 export function Contact() {
-  const emailRef = useRef<HTMLAnchorElement | null>(null);
-
-  useEffect(() => {
-    const addr = contact.emailParts.join("");
-    if (emailRef.current) {
-      emailRef.current.setAttribute("href", `mailto:${addr}`);
-      emailRef.current.textContent = addr;
-    }
-  }, []);
+  const email = contact.emailParts.join("");
 
   return (
     <Section id="contact" no="06" title={contact.headline} alt>
@@ -20,11 +11,10 @@ export function Contact() {
       </p>
       <div className="reveal flex flex-wrap gap-3">
         <a
-          ref={emailRef}
-          href="#"
+          href={`mailto:${email}`}
           className="rounded-full border border-[var(--line)] px-4 py-2 font-mono text-[12px] tracking-[0.5px] transition-colors hover:border-[var(--green)] hover:text-[var(--green)]"
         >
-          email me
+          {email}
         </a>
         {contact.links.map((l) => (
           <a

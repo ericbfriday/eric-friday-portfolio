@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   contact,
@@ -22,7 +21,7 @@ export function BookLayout() {
     <>
       <ScrollProgress />
       <SiteHeader activeLayout="book" />
-      <main>
+      <main id="main-content">
         <BookHero />
         <BookSelectedWork />
         <BookSkills />
@@ -223,15 +222,7 @@ function BookTimeline() {
 }
 
 function BookContact() {
-  const emailRef = useRef<HTMLAnchorElement | null>(null);
-
-  useEffect(() => {
-    const address = contact.emailParts.join("");
-    if (emailRef.current) {
-      emailRef.current.setAttribute("href", `mailto:${address}`);
-      emailRef.current.textContent = address;
-    }
-  }, []);
+  const email = contact.emailParts.join("");
 
   return (
     <Section id="contact" no="06" title={contact.headline} alt>
@@ -240,11 +231,10 @@ function BookContact() {
         <p className="mt-8">
           Write to{" "}
           <a
-            ref={emailRef}
-            href="#"
+            href={`mailto:${email}`}
             className="underline decoration-[var(--green)] underline-offset-4 transition-colors hover:text-[var(--green)]"
           >
-            email me
+            {email}
           </a>
           {contact.links.map((link) => (
             <span key={link.label}>

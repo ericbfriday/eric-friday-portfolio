@@ -12,12 +12,12 @@
   /* Ink */
   --ink: #19211e;
   --ink-soft: #45504b;
-  --muted: #8b958f;
+  --muted: #626c66;
   --line: #dde1dc;
   /* Accents — green leads, blue tags domains */
-  --green: #2e7d6a;
+  --green: #29705f;
   --green-soft: #dcebe5;
-  --blue: #3a6ea5;
+  --blue: #386a9f;
   --blue-soft: #e0eaf2;
 
   --radius: 16px;
@@ -35,7 +35,7 @@
   --card: #181e1b;
   --ink: #e8ece9;
   --ink-soft: #aeb6b1;
-  --muted: #77827c;
+  --muted: #7f8a84;
   --line: #262d29;
   --green: #4fbfa3;
   --green-soft: #14342c;

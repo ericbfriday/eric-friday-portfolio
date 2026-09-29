@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, type ReactNode } from "react";
+import { useMemo, type ReactNode } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   contact,
@@ -30,7 +30,7 @@ export function TerminalLayout() {
     <>
       <ScrollProgress />
       <SiteHeader activeLayout="terminal" />
-      <main className="bg-[var(--paper)] font-mono">
+      <main id="main-content" className="bg-[var(--paper)] font-mono">
         <TerminalHero />
         <TerminalWork />
         <TerminalSkills />
@@ -52,8 +52,8 @@ function TerminalHero() {
       <div className="mx-auto max-w-[var(--content-max)] px-7 py-20 md:py-28">
         <ShellFrame label="portfolio-session">
           <CommandLine command="help" />
-          <div className="reveal is-visible grid gap-8 lg:grid-cols-[1.3fr_0.7fr]">
-            <div>
+          <div className="reveal is-visible grid min-w-0 gap-8 lg:grid-cols-[1.3fr_0.7fr]">
+            <div className="min-w-0">
               <p className="text-[11px] uppercase tracking-[2px] text-[var(--green)]">
                 {identity.kicker}
               </p>
@@ -88,10 +88,10 @@ function TerminalWork() {
         {projects.map((project) => (
           <article
             key={project.no}
-            className="reveal border border-[var(--line)] bg-[var(--card)] p-5 md:p-6"
+            className="reveal min-w-0 border border-[var(--line)] bg-[var(--card)] p-5 md:p-6"
           >
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <h3 className="text-[18px] font-semibold leading-7 text-[var(--ink)]">
+              <h3 className="break-all text-[18px] font-semibold leading-7 text-[var(--ink)]">
                 ./work/{slug(project.title)}/
               </h3>
               <span className="text-[11px] uppercase tracking-[1.4px] text-[var(--muted)]">
@@ -109,10 +109,14 @@ function TerminalWork() {
               </TerminalField>
             </dl>
             {project.panel ? (
-              <pre className="mt-5 overflow-x-auto border border-[var(--line)] bg-[var(--ink)] p-4 text-[11.5px] leading-6 text-[var(--paper)]">
-                <div className="mb-2 text-[var(--muted)]">
+              <pre
+                tabIndex={0}
+                aria-label={`${project.panel.title} code sample`}
+                className="mt-5 overflow-x-auto border border-[var(--line)] bg-[var(--ink)] p-4 text-[11.5px] leading-6 text-[var(--paper)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--green)]"
+              >
+                <span className="mb-2 block text-[var(--paper)] opacity-70">
                   {project.panel.title}
-                </div>
+                </span>
                 {project.panel.lines.join("\n")}
               </pre>
             ) : null}
@@ -228,25 +232,42 @@ function TerminalLedger() {
         ))}
       </div>
 
-      <div className="reveal mt-8 overflow-hidden border border-[var(--line)]">
-        <div className="hidden grid-cols-[0.8fr_1.3fr_0.9fr_0.7fr] gap-4 border-b border-[var(--ink)] bg-[var(--card)] px-4 py-3 text-[10px] uppercase tracking-[1.5px] text-[var(--muted)] md:grid">
-          <span>area</span>
-          <span>evidence</span>
-          <span>impact</span>
-          <span className="text-right">signal</span>
+      <div
+        role="table"
+        aria-label="Contribution ledger"
+        className="reveal mt-8 overflow-hidden border border-[var(--line)]"
+      >
+        <div
+          role="row"
+          className="hidden grid-cols-[0.8fr_1.3fr_0.9fr_0.7fr] gap-4 border-b border-[var(--ink)] bg-[var(--card)] px-4 py-3 text-[10px] uppercase tracking-[1.5px] text-[var(--muted)] md:grid"
+        >
+          <span role="columnheader">area</span>
+          <span role="columnheader">evidence</span>
+          <span role="columnheader">impact</span>
+          <span role="columnheader" className="text-right">signal</span>
         </div>
         {data.rows.map((row) => (
           <div
             key={row.name}
+            role="row"
             className="grid gap-3 border-b border-[var(--line)] px-4 py-4 last:border-b-0 md:grid-cols-[0.8fr_1.3fr_0.9fr_0.7fr] md:items-center"
           >
-            <div className="text-[11px] uppercase tracking-[1.3px] text-[var(--green)]">
+            <div
+              role="cell"
+              className="text-[11px] uppercase tracking-[1.3px] text-[var(--green)]"
+            >
+              <span className="sr-only">Area: </span>
               {row.domain}
             </div>
-            <div className="font-serif text-[17px] leading-7 text-[var(--ink)]">
+            <div
+              role="cell"
+              className="font-serif text-[17px] leading-7 text-[var(--ink)]"
+            >
+              <span className="sr-only">Evidence: </span>
               {row.name}
             </div>
-            <div>
+            <div role="cell">
+              <span className="sr-only">Impact: </span>
               <div className="h-1.5 bg-[var(--line)]">
                 <div
                   className="h-full bg-[var(--green)]"
@@ -257,7 +278,11 @@ function TerminalLedger() {
                 {row.commits} authored commits
               </div>
             </div>
-            <div className="text-left text-[11px] text-[var(--muted)] md:text-right">
+            <div
+              role="cell"
+              className="text-left text-[11px] text-[var(--muted)] md:text-right"
+            >
+              <span className="sr-only">Signal: </span>
               {row.latest}
             </div>
           </div>
@@ -301,15 +326,7 @@ function TerminalTimeline() {
 }
 
 function TerminalContact() {
-  const emailRef = useRef<HTMLAnchorElement | null>(null);
-
-  useEffect(() => {
-    const address = contact.emailParts.join("");
-    if (emailRef.current) {
-      emailRef.current.setAttribute("href", `mailto:${address}`);
-      emailRef.current.textContent = address;
-    }
-  }, []);
+  const email = contact.emailParts.join("");
 
   return (
     <TerminalSection
@@ -329,11 +346,10 @@ function TerminalContact() {
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <a
-            ref={emailRef}
-            href="#"
+            href={`mailto:${email}`}
             className="border border-[var(--ink)] px-4 py-2 text-[12px] uppercase tracking-[1px] transition-colors hover:border-[var(--green)] hover:text-[var(--green)]"
           >
-            email
+            {email}
           </a>
           {contact.links.map((link) => (
             <a
@@ -433,7 +449,7 @@ function CommandStrip() {
   return (
     <nav
       aria-label="Terminal commands"
-      className="border border-[var(--line)] bg-[var(--card)] p-4"
+      className="min-w-0 border border-[var(--line)] bg-[var(--card)] p-4"
     >
       <div className="text-[10px] uppercase tracking-[1.5px] text-[var(--muted)]">
         commands

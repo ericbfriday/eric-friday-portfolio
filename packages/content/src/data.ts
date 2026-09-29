@@ -15,7 +15,7 @@ export const identity = {
   role: "Senior Frontend & Application Security Engineer — NMDP / CIBMTR",
   monogram: "FE · AppSec · AI",
   intro:
-    "I build and harden the software that connects patients to life-saving cell therapies. Four threads run through the work: owning NMDP's Okta identity libraries and an org-wide supply-chain security program; shipping frontend platforms at scale across Biotherapies, MatchSync, and CIBMTR; building production MCP servers and AI developer tooling; and acting as the de-facto security reviewer and pattern-decider across teams.",
+    "I build and harden the software that connects patients to life-saving cell therapies. Four threads run through the work: owning NMDP's Okta identity libraries — through to their planned retirement — and an org-wide supply-chain security program; shipping frontend platforms at scale across Biotherapies, MatchSync, and CIBMTR; building production MCP servers and AI developer tooling; and acting as the de-facto security reviewer, pattern-decider, and architecture advisor across teams.",
 } as const;
 
 export const nav: NavItem[] = [
@@ -33,7 +33,7 @@ export const projects: Project[] = [
     meta: "AppSec / DevOps · sole owner",
     title: "npm Supply-Chain Security Program",
     body: "A self-directed, org-wide hardening effort. npmrc-research defines registry-compliance standards; frontend-security-audit operationalizes them as a package-manager-aware auditor running 5 adaptive PASS/WARN/FAIL checks across 58+ repos on scheduled CI scans.",
-    pull: "Lockfile health, registry config, deterministic installs, version pinning — enforced continuously, reported by email.",
+    pull: "Lockfile health, registry config, deterministic installs, version pinning — enforced continuously, reported by email. Registry-governance and GitLab automation work continued through June.",
     tags: ["npm · yarn · pnpm", "CI scans", "ADRs"],
     panel: {
       title: "frontend-security-audit",
@@ -71,9 +71,9 @@ export const projects: Project[] = [
   },
   {
     no: "03",
-    meta: "AppSec · ~150 commits",
+    meta: "AppSec · ~150 commits · retired 2026",
     title: "SEL — Secure Enterprise Login",
-    body: "NMDP's shared Okta library for SPAs — SSO, session & token management, authn/authz. I rewrote the core wrapper in TypeScript (tsup + Nx), ran the Angular 18→19 migrations, and authored the canonical OIDC guidance — “how to do auth at NMDP.”",
+    body: "NMDP's shared Okta library for SPAs — SSO, session & token management, authn/authz. I rewrote the core wrapper in TypeScript (tsup + Nx), ran the Angular 18→19 migrations, and authored the canonical OIDC guidance — “how to do auth at NMDP.” In 2026 I carried out the deprecation analysis for retiring it; SEL is now fully retired and every application in the organization has been migrated off it.",
     tags: ["Okta", "OIDC / SSO", "TypeScript"],
   },
   {
@@ -101,14 +101,14 @@ export const projects: Project[] = [
     no: "07",
     meta: "CIBMTR · active 2026-06",
     title: "CIBMTR Reporting App",
-    body: "An Angular SMART-on-FHIR app retrieving EHR data into the CIBMTR FHIR server. I led a phased auth-hardening campaign: tokens moved to sessionStorage, PKCE, idle & absolute session caps, issuer validation with an origin allowlist, and BroadcastChannel cross-tab sync.",
+    body: "An Angular SMART-on-FHIR app retrieving EHR data into the CIBMTR FHIR server. I led a phased auth-hardening campaign: tokens moved to sessionStorage, PKCE, idle & absolute session caps, issuer validation with an origin allowlist, and BroadcastChannel cross-tab sync — backed by a written auth security review and phased implementation plan.",
     tags: ["SMART-on-FHIR", "PKCE", "Session hardening"],
   },
   {
     no: "08",
     meta: "CIBMTR · research & POC",
     title: "SSR Viability Engagement",
-    body: "Architecture research to move FHIR calls server-side — eliminating CORS/CSP/iframe failures at transplant centers and keeping tokens off the browser. Three Dockerized POCs and shared libraries: @cibmtr/session-store (AES-256-GCM) and a Playwright e2e suite.",
+    body: "Architecture research to move FHIR calls server-side — eliminating CORS/CSP/iframe failures at transplant centers and keeping tokens off the browser. Three Dockerized POCs and shared libraries: @cibmtr/session-store (AES-256-GCM) and a Playwright e2e suite. Production-related follow-through continued into June.",
     tags: ["Next.js / Hono", "React Router 7", "Playwright"],
   },
   {
@@ -117,6 +117,22 @@ export const projects: Project[] = [
     title: "MatchSync Platform — IFA & PMT",
     body: "Across International Forms Automation and the Property Management Tool: OIDC RP & auth-config libraries, the Next.js 14→15 upgrade, CSP reporting, security-header fixes, Better Auth role-based tRPC procedures, session-termination polling, and SonarQube remediation — a recurring better-auth architectural thread.",
     tags: ["Next.js 15", "Better Auth", "tRPC · Prisma", "CSP"],
+  },
+  {
+    no: "10",
+    meta: "Architecture · advisory · Apr–Sep 2026",
+    title: "Architecture Advisory & Modernization",
+    body: "Hands-on architecture review across teams: rewrite-vs-migrate guidance, TypeScript modernization, vulnerability findings, and testing and Kubernetes/CI/CD strategy for a legacy application (Apr); a staged micro-frontend maturity evaluation for the NMDP portfolio (Jul); and consolidated partner-team FHIR / Epic integration responses (Jul–Aug). Capped by an OAuth/PKCE security review and release-readiness summary for MatchSource (Sep).",
+    pull: "Recommendation, not reflex: Nx module boundaries first; pilot a vertical-split micro-frontend only when multi-team autonomy demands it.",
+    tags: ["Module Federation 2.0", "Nx boundaries", "FHIR · Epic", "OAuth · PKCE"],
+  },
+  {
+    no: "11",
+    meta: "Governance · Aug 2026",
+    title: "AI Governance & Policy Review",
+    body: "An audit-style review of AI adoption and governance across the organization: researched how AI is used across organizational systems, built a timeline of AI policy changes and related events, examined governance materials across Microsoft 365, and synthesized findings on controls, policy alignment, and training posture.",
+    pull: "The other side of the AI tooling work — knowing what the policy actually says before building on it.",
+    tags: ["AI governance", "Policy timeline", "Microsoft 365"],
   },
 ];
 
@@ -130,6 +146,7 @@ export const skills: SkillGroup[] = [
       "Nx monorepos",
       "UI-Router · tRPC · Prisma",
       "SSR — Next · Hono · RR7",
+      "Micro-frontend architecture",
     ],
   },
   {
@@ -152,6 +169,7 @@ export const skills: SkillGroup[] = [
       "CSP & security headers",
       "Better Auth",
       "npm supply-chain auditing",
+      "OAuth / PKCE security review",
     ],
   },
   {
@@ -174,6 +192,7 @@ export const skills: SkillGroup[] = [
       "HLA / genotyping",
       "ISBT-128",
       "CIBMTR reporting",
+      "Epic integration patterns",
     ],
   },
 ];
@@ -195,7 +214,7 @@ export const leadership: LeadershipItem[] = [
   },
   {
     title: "Enterprise-architecture communication",
-    body: "The SSR engagement produced an SBAR, a 349-line architecture review for enterprise architects, a stakeholder deck, and 5,000+ lines of comparative research — translating deep technical work into executive-readable recommendations.",
+    body: "The SSR engagement produced an SBAR, a 349-line architecture review for enterprise architects, a stakeholder deck, and 5,000+ lines of comparative research — translating deep technical work into executive-readable recommendations. Through summer 2026 that extended to consolidating partner-team FHIR / Epic questions into review-ready responses and delivering a staged micro-frontend recommendation.",
   },
 ];
 
@@ -234,8 +253,14 @@ export const stats: Stat[] = [
 ];
 
 export const timeline: TimelineEntry[] = [
-  { when: "2026 · JUN", title: "CRA SMART-on-FHIR auth-hardening", body: "PKCE, idle & absolute session caps, issuer validation, origin allowlist, and timeout-driven token revocation — with comprehensive test coverage." },
+  { when: "2026 · SEP", title: "MatchSource OAuth/PKCE security review", body: "Reviewed the OAuth 2.0 / PKCE implementation and token-storage approach, and produced release-readiness summaries for engineering." },
+  { when: "2026 · AUG", title: "AI governance & policy review", body: "Audit-style review of organizational AI usage — a timeline of policy changes, a review of governance materials across Microsoft 365, and synthesized findings on controls, policy alignment, and training posture." },
+  { when: "2026 · JUL–AUG", title: "FHIR / Epic partner architecture responses", body: "Consolidated partner-team questions on SMART-on-FHIR and Epic integration — including SSR implications — into review-ready architecture responses." },
+  { when: "2026 · JUL", title: "Micro-frontend maturity evaluation", body: "Assessed Module Federation 2.0, Angular Native Federation, single-spa, and Nx on AWS. Recommended a staged path: Nx module boundaries first, pilot a vertical-split MFE only when multi-team autonomy requires it." },
+  { when: "2026 · SUMMER", title: "SEL retired — all apps migrated", body: "Completed the deprecation analysis for Secure Enterprise Login. The library is fully retired and every application in the organization has been migrated off it." },
+  { when: "2026 · JUN", title: "CRA SMART-on-FHIR auth-hardening", body: "PKCE, idle & absolute session caps, issuer validation, origin allowlist, and timeout-driven token revocation — with comprehensive test coverage, a written security review, and an implementation plan." },
   { when: "2026 · MAY", title: "Supply-chain audit operationalized", body: "Adaptive PASS/WARN/FAIL checks rolled out across 58+ repositories on scheduled CI scans — sole owner." },
+  { when: "2026 · APR", title: "Legacy-app modernization advisory", body: "Architecture review covering rewrite-vs-migrate, TypeScript modernization, security vulnerabilities, testing strategy, and Kubernetes / GitLab CI/CD adoption." },
   { when: "2026 · MAR", title: "@nmdp/jira-mcp published to Nexus", body: "A production MCP server — 89 tools across 5 domain servers — published to NMDP's private Nexus registry. ESM, Node 22+, Zod-validated, pnpm-only, with a secret-detection CI pipeline." },
   { when: "2026 · Q1", title: "SSR viability engagement", body: "Three Dockerized POCs plus shared libraries — server-side sessions, FHIR Zod schemas, and a cross-POC Playwright suite." },
   { when: "2026 · Q1", title: "PMT — Better Auth integration", body: "Role-based tRPC procedures, session-termination polling, and an admin “stop impersonation” banner on Next.js 15 / React 19." },

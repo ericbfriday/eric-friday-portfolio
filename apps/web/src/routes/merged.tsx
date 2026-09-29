@@ -28,7 +28,7 @@ function Merged() {
     <>
       <ScrollProgress />
       <SiteHeader activeLayout="merged" />
-      <main>
+      <main id="main-content">
         <Hero />
         <SelectedWork />
         <Skills />

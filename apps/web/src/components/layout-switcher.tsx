@@ -7,7 +7,7 @@ import {
   PopoutTrigger,
 } from "@portfolio/ui/components/popout";
 import { cn } from "@portfolio/ui/lib/utils";
-import { layouts, type LayoutId } from "@/lib/layouts";
+import { createLayoutCookie, layouts, type LayoutId } from "@/lib/layouts";
 
 const icons = {
   book: BookOpen,
@@ -45,6 +45,9 @@ export function LayoutSwitcher({ activeLayout }: { activeLayout: LayoutId }) {
               <Link
                 key={layout.id}
                 to={layout.path}
+                onClick={() => {
+                  document.cookie = createLayoutCookie(layout.id);
+                }}
                 className={cn(
                   "flex items-start gap-3 rounded-[calc(var(--radius)-2px)] px-2 py-2 text-left outline-none transition-colors hover:bg-[var(--paper-2)] focus-visible:ring-2 focus-visible:ring-[var(--green)]",
                   isActive && "bg-[var(--green-soft)]",

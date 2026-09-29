@@ -108,11 +108,16 @@
     font-family: var(--font-serif);
     font-size: 17px;
     line-height: 1.6;
+    overflow-wrap: anywhere;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
   ::selection {
     background: var(--green-soft);
+  }
+  :where(a, button, summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 3px;
   }
   /* Mono label helper */
   .kicker {
@@ -124,9 +129,13 @@
   }
 }
 
-/* Reveal-on-scroll: fade + 22px rise. Degrades to visible if reduced motion. */
+/* Content is visible by default. JavaScript opts elements into reveal motion. */
 @layer utilities {
   .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal.reveal-pending {
     opacity: 0;
     transform: translateY(22px);
     transition: opacity 0.7s ease, transform 0.7s ease;
@@ -136,7 +145,11 @@
     transform: none;
   }
   @media (prefers-reduced-motion: reduce) {
-    .reveal {
+    html {
+      scroll-behavior: auto;
+    }
+    .reveal,
+    .reveal.reveal-pending {
       opacity: 1;
       transform: none;
       transition: none;

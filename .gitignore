@@ -4,8 +4,10 @@ dist
 .tanstack
 .nitro
 .wrangler
+.playwright-cli
+output/playwright
 .dev.vars
 *.local
 .DS_Store
 worker-configuration.d.ts
-src/routeTree.gen.ts
+routeTree.gen.ts

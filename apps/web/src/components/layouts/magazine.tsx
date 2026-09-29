@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useMemo } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   contact,
@@ -22,7 +22,7 @@ export function MagazineLayout() {
     <>
       <ScrollProgress />
       <SiteHeader activeLayout="magazine" />
-      <main>
+      <main id="main-content">
         <MagazineHero />
         <MagazineSelectedWork />
         <MagazineSkills />
@@ -192,7 +192,19 @@ function MagazineSkills() {
       intro="A horizontal rail of the operating vocabulary behind the work."
       alt
     >
-      <div className="reveal -mx-7 overflow-x-auto px-7 pb-2">
+      <p
+        id="skills-rail-hint"
+        className="mb-3 font-mono text-[11px] uppercase tracking-[1.3px] text-[var(--muted)]"
+      >
+        Scroll horizontally to explore →
+      </p>
+      <div
+        role="region"
+        aria-label="Skills and competencies"
+        aria-describedby="skills-rail-hint"
+        tabIndex={0}
+        className="reveal -mx-7 overflow-x-auto overscroll-x-contain px-7 pb-2 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--green)]"
+      >
         <div className="flex min-w-max gap-3">
           {skillItems.map(({ group, item }) => (
             <span
@@ -361,15 +373,7 @@ function MagazineTimeline() {
 }
 
 function MagazineContact() {
-  const emailRef = useRef<HTMLAnchorElement | null>(null);
-
-  useEffect(() => {
-    const address = contact.emailParts.join("");
-    if (emailRef.current) {
-      emailRef.current.setAttribute("href", `mailto:${address}`);
-      emailRef.current.textContent = address;
-    }
-  }, []);
+  const email = contact.emailParts.join("");
 
   return (
     <Section id="contact" no="06" title="Contact" alt>
@@ -382,11 +386,10 @@ function MagazineContact() {
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <a
-            ref={emailRef}
-            href="#"
+            href={`mailto:${email}`}
             className="rounded-full border border-[var(--ink)] px-5 py-2.5 font-mono text-[12px] uppercase tracking-[1px] transition-colors hover:border-[var(--green)] hover:text-[var(--green)]"
           >
-            email me
+            {email}
           </a>
           {contact.links.map((link) => (
             <a

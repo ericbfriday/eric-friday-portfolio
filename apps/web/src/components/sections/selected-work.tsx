@@ -38,8 +38,14 @@ export function SelectedWork() {
                 </div>
               </div>
               {p.panel ? (
-                <pre className="overflow-x-auto rounded-[12px] border border-[var(--line)] bg-[var(--ink)] p-4 font-mono text-[11.5px] leading-relaxed text-[var(--paper)]">
-                  <div className="mb-2 text-[var(--muted)]">{p.panel.title}</div>
+                <pre
+                  tabIndex={0}
+                  aria-label={`${p.panel.title} code sample`}
+                  className="overflow-x-auto rounded-[12px] border border-[var(--line)] bg-[var(--ink)] p-4 font-mono text-[11.5px] leading-relaxed text-[var(--paper)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--green)]"
+                >
+                  <span className="mb-2 block text-[var(--paper)] opacity-70">
+                    {p.panel.title}
+                  </span>
                   {p.panel.lines.join("\n")}
                 </pre>
               ) : null}

@@ -31,7 +31,10 @@ export function SiteHeader({ activeLayout }: { activeLayout: LayoutId }) {
           href="#top"
           className="font-mono text-[11px] uppercase tracking-[1.5px] text-[var(--ink-soft)]"
         >
-          Eric&nbsp;Friday <span className="text-[var(--muted)]">· FE · AppSec · AI</span>
+          Eric&nbsp;Friday{" "}
+          <span className="hidden text-[var(--muted)] sm:inline">
+            · FE · AppSec · AI
+          </span>
         </a>
         <nav className="hidden items-center gap-6 md:flex">
           {nav.map((item) => (
@@ -54,6 +57,17 @@ export function SiteHeader({ activeLayout }: { activeLayout: LayoutId }) {
           <ThemeToggle />
         </div>
       </div>
+      <noscript>
+        <nav
+          aria-label="Portfolio layouts"
+          className="mx-auto flex max-w-[var(--content-max)] flex-wrap gap-x-5 gap-y-2 border-t border-[var(--line)] px-7 py-3 font-mono text-xs uppercase tracking-[1px]"
+        >
+          <a href="/book">Book</a>
+          <a href="/magazine">Magazine</a>
+          <a href="/merged">Merged</a>
+          <a href="/terminal">Terminal</a>
+        </nav>
+      </noscript>
     </header>
   );
 }

@@ -65,13 +65,19 @@ export function ContributionMap() {
       </div>
 
       {/* Pill filter bar */}
-      <div className="reveal mb-6 flex flex-wrap gap-2">
+      <div
+        role="group"
+        aria-label="Filter contributions by domain"
+        className="reveal mb-6 flex flex-wrap gap-2"
+      >
         {data.filters.map((f) => {
           const isActive = filter === f;
           return (
             <button
               key={f}
               type="button"
+              aria-pressed={isActive}
+              aria-controls="contribution-results"
               onClick={() => setFilter(f)}
               className={`rounded-full border px-4 py-1.5 font-mono text-[11px] leading-none uppercase tracking-[1px] transition-colors ${
                 isActive
@@ -84,9 +90,15 @@ export function ContributionMap() {
           );
         })}
       </div>
+      <p className="sr-only" aria-live="polite">
+        {rows.length} contributions shown for the {filter} filter.
+      </p>
 
       {/* Typographic ledger */}
-      <div className="reveal overflow-hidden rounded-[var(--radius)] border border-[var(--line)]">
+      <div
+        id="contribution-results"
+        className="reveal overflow-hidden rounded-[var(--radius)] border border-[var(--line)]"
+      >
         <div
           className="grid items-center gap-4 border-b border-[var(--ink)] px-5 py-2.5 font-mono text-[10.5px] uppercase tracking-[1.5px] text-[var(--muted)]"
           style={{ gridTemplateColumns: "1.7fr 0.85fr 2fr 0.62fr" }}

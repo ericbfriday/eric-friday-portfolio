@@ -17,7 +17,10 @@ export function ScrollProgress() {
   }, []);
 
   return (
-    <div className="fixed inset-x-0 top-0 z-50 h-[2px] bg-transparent">
+    <div
+      aria-hidden="true"
+      className="fixed inset-x-0 top-0 z-50 h-[2px] bg-transparent"
+    >
       <div
         ref={barRef}
         className="h-full origin-left bg-[var(--green)]"

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 /** Counts from 0 → target once the element scrolls into view. */
 export function useCountUp(target: number, durationMs = 1100) {
   const ref = useRef<HTMLSpanElement | null>(null);
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(target);
   const started = useRef(false);
 
   useEffect(() => {
@@ -14,7 +14,12 @@ export function useCountUp(target: number, durationMs = 1100) {
       setValue(target);
       return;
     }
+    if (typeof IntersectionObserver === "undefined") {
+      setValue(target);
+      return;
+    }
 
+    setValue(0);
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {

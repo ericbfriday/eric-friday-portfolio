@@ -4,14 +4,24 @@ import { useEffect } from "react";
 export function useReveal() {
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
-    if (typeof IntersectionObserver === "undefined") {
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reduceMotion || typeof IntersectionObserver === "undefined") {
       els.forEach((el) => el.classList.add("is-visible"));
       return;
     }
+    els.forEach((el) => {
+      if (!el.classList.contains("is-visible")) {
+        el.classList.add("reveal-pending");
+      }
+    });
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
+            entry.target.classList.remove("reveal-pending");
             entry.target.classList.add("is-visible");
             observer.unobserve(entry.target);
           }
